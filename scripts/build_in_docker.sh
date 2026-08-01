@@ -6,7 +6,7 @@
 set -euo pipefail
 
 UPSTREAM_OWNER=oliver006
-UPSTREAM_REPO=redis-exporter
+UPSTREAM_REPO=redis_exporter
 VERSION="${1}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 ROOT_DIR="$(dirname "$SCRIPT_DIR")"
@@ -29,7 +29,6 @@ fi
 
 echo "🔨 Building Docker image: ${DOCKER_IMAGE_NAME} ..."
 docker build \
-    --platoform "${PLATFORM}" \
     -f "${DOCKERFILE_PATH}" \
     -t "${DOCKER_IMAGE_NAME}" \
     "${ROOT_DIR}"
@@ -37,7 +36,6 @@ docker build \
 echo "🏃 Running build inside container..."
 
 docker run --rm \
-    --platform "${PLATFORM}" \
     -v "${ROOT_DIR}:/src:z" \
     -w /src \
     -e VERSION="${VERSION}" \

@@ -1,0 +1,13 @@
+diff --git a/package-github-binaries.sh b/package-github-binaries.sh
+index 619b075..2163df2 100755
+--- a/package-github-binaries.sh
++++ b/package-github-binaries.sh
+@@ -20,7 +20,7 @@ for build in $(ls .build); do
+ done
+ 
+ cd dist
+-sha256sum *.gz *.zip > sha256sums.txt
++sha256sum *.gz > sha256sums.txt
+ ls -la
+ cd ..
+ 

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 UPSTREAM_OWNER=oliver006
-UPSTREAM_REPO=redis-exporter
+UPSTREAM_REPO=redis_exporter
 VERSION="${1}"
 echo "   🏢 Org:   ${UPSTREAM_OWNER}"
 echo "   📦 Proj:  ${UPSTREAM_REPO}"
@@ -19,6 +19,12 @@ mkdir -p "${DISTS}/${VERSION}" "${SRCS}"
 # 👇 用户自定义构建逻辑 (示例)
 # ==========================================
 
+# ======================================================================
+
+PATCHES="${ROOT_DIR}/patches"
+BUILD_DIR="${SRCS}/${VERSION}"
+DIST_DIR="${DISTS}/${VERSION}"
+
 echo "🔧 Compiling ${UPSTREAM_OWNER}/${UPSTREAM_REPO} ${VERSION}..."
 
 # 1. 准备阶段：安装依赖、下载代码、应用补丁等
@@ -27,9 +33,14 @@ prepare()
     echo "📦 [Prepare] Setting up build environment..."
     
     # TODO: 在此处添加准备命令
-    # 例如：apt-get update && apt-get install -y build-essential
-    # 例如：git clone -b ${VERSION} --depth=1 https://github.com/oliver006/redis-exporter ${SRCS}/${VERSION}
-    # 例如：patch -p1 < patches/loongarch-fix.patch
+    rm -rf ${SRCS}/${VERSION}
+    git clone -b ${VERSION} --depth=1 https://github.com/oliver006/redis_exporter ${SRCS}/${VERSION}
+    (
+        cd ${SRCS}/${VERSION}
+        for patch_ in ${PATCHES}/*.patch; do
+            patch -p1 < ${patch_}
+        done
+    )
     
     echo "✅ [Prepare] Environment ready."
 }
@@ -40,9 +51,11 @@ build()
     echo "🔨 [Build] Compiling source code..."
     
     # TODO: 在此处添加编译命令
-    # 例如：make -j$(nproc) ARCH=loongarch64
-    # 例如：cmake -DCMAKE_BUILD_TYPE=Release .. && make
-    
+    (
+        cd ${SRCS}/${VERSION}
+        GITHUB_REF_NAME=${VERSION} make build-some-loong64-binaries
+        ./package-github-binaries.sh
+    )
 
     echo "✅ [Build] Compilation finished."
 }
@@ -56,6 +69,8 @@ post_build()
     # 例如：mkdir -p dists && cp binary dist/
     # 例如：strip dist/binary
     
+    cp ${BUILD_DIR}/dist/* $DIST_DIR/
+
     echo "✅ [Post-Build] Artifacts ready in ./dists/${VERSION}."
 }
 

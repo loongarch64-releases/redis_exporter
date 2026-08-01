@@ -1,8 +1,8 @@
 # Redis Exporter (LoongArch64 Build)
 
-[![Build Status](https://github.com/loongarch64-releases/redis-exporter/actions/workflows/release.yml/badge.svg)](https://github.com/loongarch64-releases/redis-exporter/actions)
+[![Build Status](https://github.com/loongarch64-releases/redis_exporter/actions/workflows/release.yml/badge.svg)](https://github.com/loongarch64-releases/redis_exporter/actions)
 
-This repository contains the LoongArch64 build configuration and scripts for **[redis-exporter](https://github.com/oliver006/redis-exporter)**, originally developed by **oliver006**.
+This repository contains the LoongArch64 build configuration and scripts for **[redis_exporter](https://github.com/oliver006/redis_exporter)**, originally developed by **oliver006**.
 
 ## Quick Start
 
@@ -14,8 +14,8 @@ This repository contains the LoongArch64 build configuration and scripts for **[
 
 1. **Clone this repository**:
    ```bash
-   git clone https://github.com/loongarch64-releases/redis-exporter.git
-   cd redis-exporter
+   git clone https://github.com/loongarch64-releases/redis_exporter.git
+   cd redis_exporter
    ```
 
 2. **Get latest version**
@@ -38,13 +38,13 @@ This repository contains the LoongArch64 build configuration and scripts for **[
 
 ## Development
 
-- **Source Code**: The original source is managed upstream at [oliver006/redis-exporter](https://github.com/oliver006/redis-exporter).
+- **Source Code**: The original source is managed upstream at [oliver006/redis_exporter](https://github.com/oliver006/redis_exporter).
 - **Patches**: Any LoongArch-specific patches are stored in the `patches/` directory (if applicable).
 - **CI/CD**: Automated builds are handled via GitHub Actions (see `.github/workflows/`).
 
 ## License
 
-This build wrapper inherits the license of the original project: **oliver006/redis-exporter**.
+This build wrapper inherits the license of the original project: **oliver006/redis_exporter**.
 
 Please refer to the upstream repository for the full license text.
 

@@ -1,11 +1,13 @@
-name: Auto Build redis-exporter (Self hosted)
+name: Auto Build redis_exporter (Self hosted)
 
 on:
+  schedule:
+    - cron: '0 16 * * *'
   workflow_dispatch:
 
 env:
   UPSTREAM_OWNER: "oliver006"
-  UPSTREAM_REPO: "redis-exporter"
+  UPSTREAM_REPO: "redis_exporter"
 
 jobs:
   build-and-release:

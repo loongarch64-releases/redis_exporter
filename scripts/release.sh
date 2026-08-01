@@ -2,7 +2,7 @@
 set -euo pipefail
 
 UPSTREAM_OWNER=oliver006
-UPSTREAM_REPO=redis-exporter
+UPSTREAM_REPO=redis_exporter
 VERSION="${1}"
 echo "   🏢 Org:   ${UPSTREAM_OWNER}"
 echo "   📦 Proj:  ${UPSTREAM_REPO}"

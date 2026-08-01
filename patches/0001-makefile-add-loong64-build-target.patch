@@ -1,0 +1,22 @@
+diff --git a/Makefile b/Makefile
+index 4bc4811..a154b92 100644
+--- a/Makefile
++++ b/Makefile
+@@ -93,6 +93,17 @@ build-some-amd64-binaries:
+ 	gox -os="linux windows" -arch="amd64" -verbose -rebuild -ldflags $(GO_LDFLAGS) -output ".build/redis_exporter-${GITHUB_REF_NAME}.{{.OS}}-{{.Arch}}/{{.Dir}}" && echo "done"
+ 
+ 
++.PHONY: build-some-loong64-binaries
++build-some-loong64-binaries:
++	curl -fL -o /usr/local/bin/gox https://github.com/loongarch64-releases/gox/releases/download/v1.1.0/gox-loong64
++	chmod +x /usr/local/bin/gox
++
++	rm -rf .build | true
++
++	export CGO_ENABLED=0 ; \
++	gox -os="linux" -arch="loong64" -verbose -rebuild -ldflags $(GO_LDFLAGS) -output ".build/redis_exporter-${GITHUB_REF_NAME}.{{.OS}}-{{.Arch}}/{{.Dir}}" && echo "done"
++
++
+ .PHONY: build-all-binaries
+ build-all-binaries:
+ 	go install github.com/oliver006/gox@master

@@ -2,7 +2,7 @@ name: Auto Build redis_exporter (Self hosted)
 
 on:
   schedule:
-    - cron: '0 16 * * *'
+    - cron: '49 21 * * *'
   workflow_dispatch:
 
 env:
